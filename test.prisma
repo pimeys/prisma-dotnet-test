@@ -1,0 +1,23 @@
+// Download the chinook SQLite file here: https://www.sqlitetutorial.net/sqlite-sample-database/
+// Place it in `<repo_root>/db/chinook.db`.
+datasource db {
+  provider = "sqlserver"
+  url      = "sqlserver://localhost:1433;database=master;user=SA;password=<YourStrong@Passw0rd>;trustServerCertificate=true"
+}
+
+model A {
+  id Int @id @default(autoincrement())
+  b1 Int
+  b2 Int
+  b  B   @relation(fields: [b1, b2], references: [id1, id2], onDelete: Cascade, onUpdate: Cascade)
+
+  @@unique([b1, b2])
+}
+
+model B {
+  id1 Int
+  id2 Int
+  a   A[]
+
+  @@id([id1, id2])
+}
